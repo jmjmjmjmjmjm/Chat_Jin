@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "289017788169",
+    "project_id": "chatjin-12713",
+    "storage_bucket": "chatjin-12713.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289017788169:android:cfdfc195ec9ee51db1c5d8",
+        "android_client_info": {
+          "package_name": "com.gg.chatjin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289017788169-45tuu4ttr82lrlssph2r9rru11vnemkh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gg.chatjin",
+            "certificate_hash": "35549e437acfa1db74e4ebe18aeaaeadfee25eac"
+          }
+        },
+        {
+          "client_id": "289017788169-aghdr7vh55illui7l47urip18gubtg6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGZ0f8wicKlyt-vgxhfEryz9mzT1aD_Zs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289017788169-aghdr7vh55illui7l47urip18gubtg6r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="Chat_Jin"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.092" />
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            android:layout_gravity="center"
+            android:textColorHint="@android:color/darker_gray"
+            android:gravity="center"
+            android:hint="아이디"
+            />
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="'@'"
+            />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@android:color/darker_gray"
+            android:text="이메일을 선택해주세요."
+            />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dropdown"
+            />
+    </LinearLayout>
+    <EditText
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:textSize="15dp"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content"
+        android:hint="비밀번호 입력"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColorHint="@android:color/darker_gray"
+        android:inputType="textPassword"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원가입하러가기"
+        android:textSize="10dp"
+        android:layout_gravity="end"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        android:layout_marginRight="20dp"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:text="페이스북 로그인"
+        android:backgroundTint="@android:color/darker_gray"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:text="구글 로그인"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/darker_gray"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"/>
+
+
+</LinearLayout>
