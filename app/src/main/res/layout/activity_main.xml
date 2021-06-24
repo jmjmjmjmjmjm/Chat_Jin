@@ -31,6 +31,7 @@
         android:layout_marginRight="20dp">
 
         <EditText
+            android:id="@+id/id_login"
             android:layout_width="150dp"
             android:layout_height="match_parent"
             android:background="@color/white"
@@ -50,12 +51,12 @@
             android:text="'@'"
             />
         <TextView
-            android:id="@+id/email"
+            android:id="@+id/email_login"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@android:color/black"
             android:text="이메일을 선택해주세요."
             />
 
@@ -67,6 +68,7 @@
             />
     </LinearLayout>
     <EditText
+        android:id="@+id/password_login"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
@@ -81,6 +83,7 @@
         android:inputType="textPassword"
         />
     <Button
+        android:id="@+id/join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="회원가입하러가기"
@@ -91,18 +94,29 @@
         android:layout_marginRight="20dp"
         />
     <Button
+        android:id="@+id/start_login"
         android:layout_width="match_parent"
-        android:text="페이스북 로그인"
+        android:text="로그인"
         android:backgroundTint="@android:color/darker_gray"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp"/>
     <Button
+        android:id="@+id/goole_login"
         android:layout_width="match_parent"
         android:text="구글 로그인"
         android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/darker_gray"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="20dp"/>
+    <Button
+        android:id="@+id/facebook_login"
+        android:layout_width="match_parent"
+        android:text="페이스북 로그인"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_blue_light"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"/>
