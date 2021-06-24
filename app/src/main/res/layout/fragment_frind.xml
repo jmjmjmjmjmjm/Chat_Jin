@@ -20,6 +20,7 @@
             android:background="@drawable/ted_gray">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/myimg"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginLeft="20dp"

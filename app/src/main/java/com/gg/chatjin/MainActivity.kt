@@ -34,13 +34,7 @@ class MainActivity : AppCompatActivity() {
             val docRef = db.collection("users").document(user?.uid.toString())
             docRef.get().addOnSuccessListener { document ->
                 Log.d("도큐먼트",""+document.data)
-                if (document.data == null) {
-                    finish()
-                    val intent = Intent(this, ProfileActivity::class.java)
-                    intent.putExtra("uid", user?.uid)
-                    intent.putExtra("email", user?.email)
-                    startActivity(intent)
-                } else {
+                if (document.data != null) {
                     finish()
                     val intent = Intent(this, Home_Activity::class.java)
                     intent.putExtra("uid", user?.uid)

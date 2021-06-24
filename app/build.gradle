@@ -55,4 +55,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'         // 파이어베이스
     implementation 'com.google.android.material:material:1.1.0' // 뷰페이저
     implementation 'de.hdodenhof:circleimageview:3.1.0' // 서클이미지뷰
+    implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'gun0912.ted:tedpermission:2.2.3'    // TedPermission
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 }
