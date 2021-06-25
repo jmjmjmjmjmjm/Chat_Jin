@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,20 +8,81 @@
     android:orientation="vertical"
     tools:context=".CreateRoom_Activity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="방 만들기"
+        android:textColor="@color/black"
+        android:textSize="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="선택해주세요!"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/toggle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.899"
+        tools:layout_editor_absoluteX="0dp" />
+
     <com.nex3z.togglebuttongroup.SingleSelectToggleGroup
+        android:id="@+id/toggle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.297">
 
         <com.nex3z.togglebuttongroup.button.LabelToggle
+            android:id="@+id/toggle_one"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="1:1채팅"/>
-        <com.nex3z.togglebuttongroup.button.LabelToggle
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:text="그룹채팅"/>
+            android:text="1:1채팅"
+            android:textSize="20dp" />
 
+        <com.nex3z.togglebuttongroup.button.LabelToggle
+            android:id="@+id/toggle_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="그룹채팅"
+            android:textSize="20dp" />
     </com.nex3z.togglebuttongroup.SingleSelectToggleGroup>
-</LinearLayout>
+
+    <EditText
+        android:id="@+id/title_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="방 제목을 입력해주세요!"
+        android:textColor="@color/black"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggle"
+        app:layout_constraintVertical_bias="0.118"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/create_room"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="방생성하기"
+        android:textColor="@color/black"
+        android:background="@android:color/holo_blue_light"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_room"
+        app:layout_constraintVertical_bias="0.212" />
+</androidx.constraintlayout.widget.ConstraintLayout>
