@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
             android:layout_marginLeft="30dp"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:src="@drawable/cat"
+            android:src="@drawable/piple"
             app:civ_border_color="@android:color/darker_gray"
             app:civ_border_width="2dp" />
 
@@ -30,33 +30,31 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:text="이름입력"
-                android:textColor="@color/black"
-                android:textSize="15dp"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.088"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.308" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/one_title"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:text="일대일채팅하실분"
-                android:textColor="@android:color/darker_gray"
+                android:textColor="@color/black"
+                android:textSize="25dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.088"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/one_username"
-                app:layout_constraintVertical_bias="0.27" />
+                app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
