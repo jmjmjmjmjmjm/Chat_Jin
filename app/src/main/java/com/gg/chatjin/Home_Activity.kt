@@ -4,10 +4,8 @@ import adapters.PagerAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_home_activity.*
-import kotlinx.android.synthetic.main.fragment_frind.*
 
 class Home_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +17,7 @@ class Home_Activity : AppCompatActivity() {
         tab_layout.addTab(tab_layout.newTab().setText("방리스트"))
         tab_layout.addTab(tab_layout.newTab().setText("1대1채팅"))
         tab_layout.addTab(tab_layout.newTab().setText("그룹채팅"))
-        val pagerAdapter = PagerAdapter(supportFragmentManager,5, uid!!)
+        val pagerAdapter = PagerAdapter(supportFragmentManager,5)
         view_pager.adapter=pagerAdapter
         tab_layout.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {}
@@ -37,7 +35,11 @@ class Home_Activity : AppCompatActivity() {
         super.onStart()
 
         option.setOnClickListener {
-            val intent = Intent(this,OptionActivity::class.java)
+            val intent = Intent(this,Option_Activity::class.java)
+            startActivity(intent)
+        }
+        floatingActionButton.setOnClickListener {
+            val intent = Intent(this,CreateRoom_Activity::class.java)
             startActivity(intent)
         }
     }

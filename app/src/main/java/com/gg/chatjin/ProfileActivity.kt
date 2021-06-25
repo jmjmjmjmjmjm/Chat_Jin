@@ -29,6 +29,7 @@ class ProfileActivity : AppCompatActivity() {
     val db = Firebase.firestore
     var uid:String?=null
     val storage = Firebase.storage
+    var userprofile:Boolean=false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         uid =intent.getStringExtra("uid")
@@ -48,7 +49,7 @@ class ProfileActivity : AppCompatActivity() {
         val username = nickname.text.toString()
         val role = "user"
         val status = ""
-        val userDto = UserDto(uid, role, username, email, status, null)
+        val userDto = UserDto(uid, role, username, email,userprofile, status, null)
         db.collection("users").document(uid).set(userDto)
     }
 
@@ -71,6 +72,7 @@ class ProfileActivity : AppCompatActivity() {
                 var currentImgUrl: Uri? = data?.data
                 val storageRef = storage.reference.child(uid!!).child("profile")
                 storageRef.putFile(currentImgUrl!!).addOnSuccessListener { Log.d("사진추가","완료") }
+                userprofile=true
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, currentImgUrl)
                 img_plus.setImageBitmap(bitmap)
             }

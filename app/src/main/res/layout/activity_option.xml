@@ -3,16 +3,59 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
-    android:layout_height="wrap_content"
+    android:layout_height="300dp"
     android:layout_gravity="center"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".OptionActivity">
+    tools:context=".Option_Activity">
 
-    <ListView
-        android:id="@+id/option_view"
+    <TextView
+        android:id="@+id/password_ch"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
         android:background="@drawable/ted_gray"
-        android:layout_height="wrap_content"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="비밀번호변경"
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/blacklist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:background="@drawable/ted_gray"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="차단목록"
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/user_out"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:background="@drawable/ted_gray"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="회원탈퇴"
+        android:textSize="20dp"
+        />
+    <TextView
+        android:id="@+id/user_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:background="@drawable/ted_gray"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:text="로그아웃"
+        android:textSize="20dp"
+        />
 
 </LinearLayout>

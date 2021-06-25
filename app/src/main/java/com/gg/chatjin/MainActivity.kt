@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     var auth = Firebase.auth
     val db = Firebase.firestore
+
     lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         sp()
         join.setOnClickListener {
-            val intent = Intent(this,JoinActivity::class.java)
+            val intent = Intent(this, Join_Activity::class.java)
             startActivity(intent)
         }
         start_login.setOnClickListener { login() }
@@ -33,11 +34,16 @@ class MainActivity : AppCompatActivity() {
             val user = it.currentUser
             val docRef = db.collection("users").document(user?.uid.toString())
             docRef.get().addOnSuccessListener { document ->
-                Log.d("도큐먼트",""+document.data)
-                if (document.data != null) {
+                Log.d("도큐먼트", "" + document.data)
+                if (document.data != null && user?.uid != null) {
                     finish()
                     val intent = Intent(this, Home_Activity::class.java)
                     intent.putExtra("uid", user?.uid)
+                    startActivity(intent)
+                }
+                if (document.data != null && user?.uid == null) {
+                    finish()
+                    val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                 }
 
@@ -103,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w("TAG", "signInWithEmail:failure", task.exception)
+                    Log.w("로그인실패", "signInWithEmail:failure", task.exception)
 
                 }
             }

@@ -7,16 +7,15 @@ import fragments.*
 
 class PagerAdapter(
     fragmentManager: FragmentManager,
-    val tabCount:Int,
-    val uid:String
+    val tabCount:Int
     ) :FragmentStatePagerAdapter(fragmentManager){
     override fun getItem(position: Int): Fragment {
         when(position){
-            0->{ return friend(uid) }
+            0->{ return friend() }
             1->{ return roomList() }
             2->{ return oneOnOne() }
             3->{ return group() }
-            else->{ return friend(uid) }
+            else->{ return friend() }
         }
     }
 

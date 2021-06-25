@@ -9,7 +9,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_join.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-class JoinActivity : AppCompatActivity() {
+class Join_Activity : AppCompatActivity() {
     lateinit var auth:FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
