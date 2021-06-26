@@ -41,7 +41,7 @@ class GroupAdapter(
                 val yes = dialogView.findViewById<Button>(R.id.dialog_yes)
                 no.setOnClickListener { ad.dismiss() }
                 yes.setOnClickListener {
-                    intent.putExtra("board_uid", itemList[position].toString())
+                    intent.putExtra("board_uid", itemList[position].boardid)
                     itemView.context.startActivity(intent)
                     ad.dismiss()
                 }
