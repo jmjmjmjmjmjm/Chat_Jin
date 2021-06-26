@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.NoActionBar">
-        <activity android:name=".CreateRoom_Activity"></activity>
+        <activity android:name=".Chat_Activity"></activity>
+        <activity android:name=".CreateRoom_Activity" />
         <activity android:name=".blacklist_Activity" />
         <activity android:name=".password_ch" />
         <activity android:name=".ProfileActivity" />

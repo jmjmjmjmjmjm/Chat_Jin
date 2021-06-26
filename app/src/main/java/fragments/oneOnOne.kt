@@ -25,7 +25,6 @@ class oneOnOne : Fragment() {
     var ct: Context? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -33,14 +32,9 @@ class oneOnOne : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         ct =container?.context
-        var v = inflater.inflate(R.layout.fragment_one_on_one,container,false)
         return inflater.inflate(R.layout.fragment_one_on_one, container, false)
     }
 
-    override fun onStart() {
-        super.onStart()
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val re = view.findViewById<RecyclerView>(R.id.oneOnOne_re)
@@ -50,11 +44,12 @@ class oneOnOne : Fragment() {
         docRef.get().addOnSuccessListener {
             val list = it.toObjects<OneBoardDto>()
             for (i in 0 until list.size) {
-                var uid = list[i].uid.toString()
+                val boardid = list[i].boardid
+                var uid = list[i].uid
                 var username =list[i].username
                 var title = list[i].title
                 var profile = list[i].profile
-                oneBoardDtolist.add(OneBoardDto(uid,username,title,profile))
+                oneBoardDtolist.add(OneBoardDto(boardid,uid,username,title,profile))
                 Log.d("리스트", "" + oneBoardDtolist)
             }
             Log.d("컨텍스트", "" + ct + re)
