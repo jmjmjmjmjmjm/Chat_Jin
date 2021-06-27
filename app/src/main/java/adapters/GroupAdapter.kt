@@ -62,7 +62,7 @@ class GroupAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.setText(itemList.get(position).title)
+        holder.title.setText(itemList.get(position).message)
         holder.person.setText(itemList.get(position).person.toString())
         if (itemList.get(position).profile) {
             val img = itemList.get(position).uid

@@ -66,7 +66,7 @@ class OneAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.title.setText(itemList.get(position).title)
+        holder.title.setText(itemList.get(position).message)
         holder.username.setText(itemList.get(position).username)
         if (itemList.get(position).profile) {
             var img = itemList.get(position).uid

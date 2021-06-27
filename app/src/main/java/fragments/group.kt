@@ -46,7 +46,7 @@ class group : Fragment() {
                 val boardid = list[i].boardid
                 var uid = list[i].uid
                 var username =list[i].username
-                var title = list[i].title
+                var title = list[i].message
                 var profile = list[i].profile
                 var person = list[i].person
                 groupBoardlist.add(GroupBoardDto(boardid,uid,username,title,profile,person))

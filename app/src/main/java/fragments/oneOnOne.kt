@@ -47,7 +47,7 @@ class oneOnOne : Fragment() {
                 val boardid = list[i].boardid
                 var uid = list[i].uid
                 var username =list[i].username
-                var title = list[i].title
+                var title = list[i].message
                 var profile = list[i].profile
                 oneBoardDtolist.add(OneBoardDto(boardid,uid,username,title,profile))
                 Log.d("리스트", "" + oneBoardDtolist)
