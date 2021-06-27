@@ -49,6 +49,7 @@ class CreateRoom_Activity : AppCompatActivity() {
                         val oneBoardDto = OneBoardDto(id,uid, username!!, title, profile!!,1)
                         boardid.set(oneBoardDto)
                         list.add(oneBoardDto)
+                        list_create(room!!,id)
                         finish()
                     }
                 }
@@ -66,6 +67,7 @@ class CreateRoom_Activity : AppCompatActivity() {
                         boardid.set(groupBoardDto)
                         list.add(groupBoardDto)
                         Log.d("보드아이디 확인",""+boardid)
+                        list_create(room!!,id)
                         finish()
                     }
                 }

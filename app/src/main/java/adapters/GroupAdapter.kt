@@ -13,7 +13,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gg.chatjin.Chat_Activity
+import com.gg.chatjin.CreateRoom_Activity
 import com.gg.chatjin.R
+import com.gg.chatjin.list_create
 import de.hdodenhof.circleimageview.CircleImageView
 import dtos.GroupBoardDto
 import java.util.zip.Inflater
@@ -43,6 +45,7 @@ class GroupAdapter(
                 yes.setOnClickListener {
                     intent.putExtra("board_uid", itemList[position].boardid)
                     itemView.context.startActivity(intent)
+                    list_create("groupBoard",itemList[position].boardid)
                     ad.dismiss()
                 }
                 ad.setView(dialogView)

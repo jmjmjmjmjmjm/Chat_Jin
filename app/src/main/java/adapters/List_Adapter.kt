@@ -1,9 +1,7 @@
 package adapters
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,18 +10,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gg.chatjin.Chat_Activity
-import com.gg.chatjin.Home_Activity
 import com.gg.chatjin.R
 import com.gg.chatjin.list_create
-import com.google.firebase.firestore.ktx.getField
 import de.hdodenhof.circleimageview.CircleImageView
 import dtos.OneBoardDto
-import kotlinx.android.synthetic.main.oneonone_item.view.*
 
-class OneAdapter(
+class List_Adapter(
     private val itemList: ArrayList<OneBoardDto>,
     private val inflater: LayoutInflater
-) : RecyclerView.Adapter<OneAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<List_Adapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView
@@ -47,7 +42,6 @@ class OneAdapter(
                 yes.setOnClickListener {
                     intent.putExtra("board_uid", itemList[position].boardid)
                     itemView.context.startActivity(intent)
-                    list_create("oneBoard",itemList[position].boardid)
                     ad.dismiss()
                 }
                 ad.setView(dialogView)

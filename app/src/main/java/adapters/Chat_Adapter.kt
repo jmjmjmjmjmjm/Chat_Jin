@@ -25,7 +25,7 @@ class Chat_Adapter(
 
         fun bind(item: ChatDto) {
             youchat_content.text = item.message
-            youchat_date?.text = item.createdate
+            youchat_date?.text = item.time.toString()
             youchat_name.text= item.username
         }
     }
@@ -37,9 +37,8 @@ class Chat_Adapter(
 
         fun bind(item: ChatDto) {
             mychat_content.text = item.message
-            mychat_date?.text = item.createdate
+            mychat_date?.text = item.time.toString()
             mychat_name.text= item.username
-            Log.d("어뎁터 바인드확인",""+item.username)
         }
 
     }

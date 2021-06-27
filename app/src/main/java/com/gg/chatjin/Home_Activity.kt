@@ -5,6 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home_activity.*
 
 class Home_Activity : AppCompatActivity() {
@@ -41,6 +44,31 @@ class Home_Activity : AppCompatActivity() {
         floatingActionButton.setOnClickListener {
             val intent = Intent(this,CreateRoom_Activity::class.java)
             startActivity(intent)
+        }
+    }
+}
+fun list_create(board: String, boarduid:String) {
+    val db = Firebase.firestore
+    val user = Firebase.auth.currentUser
+
+    if (board == "groupBoard") {
+        val groupstore =
+            db.collection("groupBoard").document(boarduid).get() // 보드 유아디로 보드 내용검색
+        groupstore.addOnSuccessListener {
+            val data = it.data
+            if (data != null) {
+                db.collection("users").document(user!!.uid).collection("userlist").add(data)
+            }  // 보드내용을 내 유저데이터에 저장
+        }
+    }
+    if (board == "oneBoard") {
+        val boardstore =
+            db.collection("oneBoard").document(boarduid).get() // 보드 유아디로 보드 내용검색
+        boardstore.addOnSuccessListener {
+            val data = it.data
+            if (data != null) {
+                db.collection("users").document(user!!.uid).collection("userlist").add(data)
+            }  // 보드내용을 내 유저데이터에 저장
         }
     }
 }

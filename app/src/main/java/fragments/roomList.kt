@@ -1,5 +1,6 @@
 package fragments
 
+import adapters.List_Adapter
 import adapters.OneAdapter
 import android.os.Bundle
 import android.util.Log
@@ -45,7 +46,7 @@ class roomList : Fragment() {
             for (i in 0 until list.size){
                 userlist.add(list[i])
             }
-            val adapter = OneAdapter(userlist, LayoutInflater.from(this.context))
+            val adapter = List_Adapter(userlist, LayoutInflater.from(this.context))
             rommlist_re.adapter=adapter
             rommlist_re.layoutManager= LinearLayoutManager(this.context)
 
