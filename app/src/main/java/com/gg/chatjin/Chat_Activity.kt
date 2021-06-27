@@ -26,19 +26,24 @@ class Chat_Activity : AppCompatActivity() {
 
     val user = Firebase.auth.currentUser
     val db = Firebase.firestore
-    var uid: String = String()
+    var boarduid: String = String()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_)
-        uid = intent.getStringExtra("board_uid").toString()
+        boarduid = intent.getStringExtra("board_uid").toString()
 
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onStart() {
         super.onStart()
+
+        val chatRef = db.collection("list").document(boarduid).collection("message")
+        chatRef.addSnapshotListener { value, error ->
+            Log.d("메시지확인",""+value)
+        }
 
         chat_start.setOnClickListener {
             val docRef = db.collection("users").document(user!!.uid)   // 나를 찾고
@@ -48,18 +53,37 @@ class Chat_Activity : AppCompatActivity() {
                 val username = it.getField<String>("username").toString()
                 val profile = it.getField<Boolean>("userprofile")
                 var time = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString()
-                Log.d("내정보확인", "" + uid + message.text.toString() + username + profile + time)
                 val chatDto = ChatDto(uid, username, message.text.toString(), profile!!, time,1)
-                Log.d("챗디티오확인", "" + chatDto)
-                val chatRef = db.collection("oneBoard").document(uid)
-                chatRef.collection("message").add(chatDto)
+
+                val groupstore = db.collection("groupBoard").document(boarduid).get() // 보드 유아디로 보드 내용검색
+                groupstore.addOnSuccessListener {
+                    Log.d("보드데이터확인",""+it.data)
+                    val data = it.data
+                    if (data != null) {
+                        db.collection("users").document(user!!.uid).collection("userlist").add(data)
+                    }  // 보드내용을 내 유저데이터에 저장
+                }
+
+                val boardstore = db.collection("oneBoard").document(boarduid).get() // 보드 유아디로 보드 내용검색
+                boardstore.addOnSuccessListener {
+                    Log.d("보드데이터확인",""+it.data)
+                    val data = it.data
+                    if (data != null) {
+                        db.collection("users").document(user!!.uid).collection("userlist").add(data)
+                    }  // 보드내용을 내 유저데이터에 저장
+                }
+
+
+                chatRef.add(chatDto)
                 message.hint=""
                 message.text=null
             }
-
-
         }
+
+
     }
+
+
 
 
 }

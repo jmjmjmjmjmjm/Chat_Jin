@@ -45,9 +45,10 @@ class CreateRoom_Activity : AppCompatActivity() {
                         Log.d("유저확인", "" + username + title)
                         val boardid = db.collection(room!!).document()
                         val id = boardid.id
-                        val oneBoardDto = OneBoardDto(id,uid, username!!, title, profile!!)
+                        val list = db.collection("list").document(id).collection("message")
+                        val oneBoardDto = OneBoardDto(id,uid, username!!, title, profile!!,1)
                         boardid.set(oneBoardDto)
-
+                        list.add(oneBoardDto)
                         finish()
                     }
                 }
@@ -60,9 +61,10 @@ class CreateRoom_Activity : AppCompatActivity() {
                         Log.d("유저확인", "" + username + title)
                         val boardid = db.collection(room!!).document()
                         val id = boardid.id
+                        val list = db.collection("list").document(id).collection("message")
                         var groupBoardDto=GroupBoardDto(id,uid,username!!,title,profile!!,1)
                         boardid.set(groupBoardDto)
-
+                        list.add(groupBoardDto)
                         Log.d("보드아이디 확인",""+boardid)
                         finish()
                     }
