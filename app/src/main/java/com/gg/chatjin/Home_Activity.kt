@@ -10,6 +10,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dtos.ChatDto
 import kotlinx.android.synthetic.main.activity_home_activity.*
 
 class Home_Activity : AppCompatActivity() {
@@ -86,4 +87,8 @@ fun userlist_delete(uid:String,boardid:String){
 fun personup(boardid:String){
     val db = Firebase.firestore
     db.collection("oneBoard").document(boardid).update("person", FieldValue.increment(+1))
+}
+fun freind_add(myuid:String,youuid:String,data:ChatDto){
+    val db = Firebase.firestore
+    db.collection("freinds").document(myuid).collection(myuid).add(data)
 }

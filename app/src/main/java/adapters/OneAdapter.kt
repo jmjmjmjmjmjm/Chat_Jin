@@ -1,5 +1,6 @@
 package adapters
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.graphics.toColor
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -60,6 +62,7 @@ class OneAdapter(
                     ad.show()
                 }
             }
+
         }
     }
 
@@ -72,10 +75,12 @@ class OneAdapter(
         return itemList.size
     }
 
+
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.setText(itemList.get(position).message)
         holder.username.setText(itemList.get(position).username)
-        holder.person.setText((itemList.get(position).person).toString() + "/2")
+        holder.person.setText((itemList.get(position).person).toString()+ "/2")
         if (itemList.get(position).profile) {
             var img = itemList.get(position).uid
             var imgload =

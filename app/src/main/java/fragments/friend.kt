@@ -1,5 +1,6 @@
 package fragments
 
+import adapters.Friend_Adapter
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
@@ -15,15 +16,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.gg.chatjin.R
+import com.gg.chatjin.freind_add
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.getField
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import de.hdodenhof.circleimageview.CircleImageView
+import dtos.ChatDto
+import dtos.OneBoardDto
 import kotlinx.android.synthetic.main.activity_profile.*
 import kotlinx.android.synthetic.main.fragment_frind.*
 import kotlinx.android.synthetic.main.friend_item.*
@@ -34,7 +40,8 @@ class friend() : Fragment() {
     val db = Firebase.firestore
     val user = Firebase.auth.currentUser
     val storage = Firebase.storage
-    var update_img: CircleImageView? =null
+    var update_img: CircleImageView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -45,10 +52,8 @@ class friend() : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_frind, container, false)
     }
-
 
 
     fun myprofile() {
@@ -92,13 +97,30 @@ class friend() : Fragment() {
             }   // 이미지 클릭시
             update_start.setOnClickListener {
                 val washingtonRef = db.collection("users").document(user!!.uid)
-                washingtonRef.update("username",update_name.text.toString())
-                washingtonRef.update("status",update_message.text.toString())
+                washingtonRef.update("username", update_name.text.toString())
+                washingtonRef.update("status", update_message.text.toString())
                 di.dismiss()
             }   // 업데이트 완료버튼
             di.setView(dView)
             di.show()
         }   //프로필업데이트
+    }
+
+    fun friends() {
+        val f = db.collection("freinds").document(user!!.uid).collection(user!!.uid)
+        f.addSnapshotListener { value, error ->
+            var friendDtolist: ArrayList<ChatDto> = ArrayList()
+            if (value != null) {
+                var list = value.toObjects<ChatDto>()
+                Log.d("친구확인",""+value.toObjects<ChatDto>())
+                for (i in list.indices){
+                    friendDtolist.add(list[i])
+                }
+                val adapter = Friend_Adapter(friendDtolist, LayoutInflater.from(this.context))
+                friend_re.adapter = adapter
+                friend_re.layoutManager = LinearLayoutManager(this.context)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -109,9 +131,10 @@ class friend() : Fragment() {
                 var currentImgUrl: Uri? = data?.data
                 val storageRef = storage.reference.child(user!!.uid).child("profile")
                 val washingtonRef = db.collection("users").document(user!!.uid)
-                storageRef.putFile(currentImgUrl!!).addOnSuccessListener { Log.d("사진수정","완료") }
-                washingtonRef.update("profile",true)
-                 var bitmap = MediaStore.Images.Media.getBitmap(activity?.contentResolver, currentImgUrl);
+                storageRef.putFile(currentImgUrl!!).addOnSuccessListener { Log.d("사진수정", "완료") }
+                washingtonRef.update("profile", true)
+                var bitmap =
+                    MediaStore.Images.Media.getBitmap(activity?.contentResolver, currentImgUrl);
                 update_img?.setImageBitmap(bitmap)
             }
         } else {
@@ -122,7 +145,7 @@ class friend() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         myprofile()
+        friends()
     }
-
 
 }

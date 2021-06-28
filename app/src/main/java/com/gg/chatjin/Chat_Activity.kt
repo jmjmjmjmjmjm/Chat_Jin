@@ -62,12 +62,13 @@ class Chat_Activity : AppCompatActivity() {
                 val message = findViewById<EditText>(R.id.chat_message)
                 val username = it.getField<String>("username").toString()
                 val profile = it.getField<Boolean>("userprofile")
+                val status = it.getField<String>("status")
                 var createdate = System.currentTimeMillis().toInt()
                 var t1=LocalDateTime.now()
                 val t2 = DateTimeFormatter.ofPattern("MM-dd일  HH : mm")
                 val time = t1.format(t2)
                 Log.d("시간확인",""+time)
-                val chatDto = ChatDto(uid, username, message.text.toString(), profile!!, createdate, 1,time)
+                val chatDto = ChatDto(uid, username,status, message.text.toString(), profile!!, createdate, 1,time)
 
                 chatRef.add(chatDto)
                 message.hint = ""

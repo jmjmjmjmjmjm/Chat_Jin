@@ -28,7 +28,7 @@ class Option_Activity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        blacklist.setOnClickListener { }
+
         user_out.setOnClickListener {
             val db = Firebase.firestore
             if (user != null) {
