@@ -24,13 +24,14 @@ class List_Adapter(
         val username: TextView
         val img: CircleImageView
         val delete: Button
+        val person:TextView
 
         init {
             title = itemView.findViewById(R.id.one_title)
             username = itemView.findViewById(R.id.one_username)
             img = itemView.findViewById(R.id.one_profile)
             delete = itemView.findViewById(R.id.one_delete)
-
+            person= itemView.findViewById(R.id.one_person)
 
             itemView.setOnClickListener {
                 val builder = AlertDialog.Builder(itemView.context)
@@ -66,6 +67,7 @@ class List_Adapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.setText(itemList.get(position).message)
         holder.username.setText(itemList.get(position).username)
+        holder.person.setText((itemList.get(position).person).toString())
         if (itemList.get(position).profile) {
             var img = itemList.get(position).uid
             var imgload =

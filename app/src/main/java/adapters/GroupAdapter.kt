@@ -45,6 +45,7 @@ class GroupAdapter(
                 yes.setOnClickListener {
                     intent.putExtra("board_uid", itemList[position].boardid)
                     itemView.context.startActivity(intent)
+                    personup(itemList[position].boardid)
                     list_create("groupBoard", itemList[position].boardid)
                     ad.dismiss()
                 }

@@ -35,6 +35,7 @@ class Chat_Activity : AppCompatActivity() {
         setContentView(R.layout.activity_chat_)
         boarduid = intent.getStringExtra("board_uid").toString()
         messageload()
+
         val list = db.collection("list").document(boarduid).collection("message")
         list.addSnapshotListener { value, error ->
             messageload()

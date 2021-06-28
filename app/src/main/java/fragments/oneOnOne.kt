@@ -41,25 +41,30 @@ class oneOnOne : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val docRef = db.collection("oneBoard")
         docRef.addSnapshotListener { value, error ->
-            if (value != null) {
-                var oneBoardDtolist: ArrayList<OneBoardDto> = ArrayList()
-                docRef.get().addOnSuccessListener {
-                    val list = it.toObjects<OneBoardDto>()
-                    for (i in 0 until list.size) {
-                        val boardid = list[i].boardid
-                        var uid = list[i].uid
-                        var username = list[i].username
-                        var title = list[i].message
-                        var profile = list[i].profile
-                        oneBoardDtolist.add(OneBoardDto(boardid, uid, username, title, profile))
-                        Log.d("리스트", "" + oneBoardDtolist)
-                    }
-                    Log.d("컨텍스트", "" + ct + re)
+            create(re)
+        }
+
+
+    }
+    fun create(re:RecyclerView){
+        val docRef = db.collection("oneBoard")
+        var oneBoardDtolist: ArrayList<OneBoardDto> = ArrayList()
+        docRef.get().addOnSuccessListener {
+            val list = it.toObjects<OneBoardDto>()
+            for (i in 0 until list.size) {
+                db.collection("oneBoard").document(list[i].boardid).addSnapshotListener { value, error ->
+                    oneBoardDtolist= list as ArrayList<OneBoardDto>
                     val adapter = OneAdapter(oneBoardDtolist, LayoutInflater.from(ct), user!!.uid)
                     re?.adapter = adapter
                     re?.layoutManager = LinearLayoutManager(ct)
                 }
             }
+            oneBoardDtolist= list as ArrayList<OneBoardDto>
+            Log.d("리스트", "" + oneBoardDtolist)
+            Log.d("컨텍스트", "" + ct + re)
+            val adapter = OneAdapter(oneBoardDtolist, LayoutInflater.from(ct), user!!.uid)
+            re?.adapter = adapter
+            re?.layoutManager = LinearLayoutManager(ct)
         }
 
     }

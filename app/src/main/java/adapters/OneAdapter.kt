@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.oneonone_item.view.*
 class OneAdapter(
     private val itemList: ArrayList<OneBoardDto>,
     private val inflater: LayoutInflater,
-    val uid:String
+    val uid: String
 ) : RecyclerView.Adapter<OneAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -30,30 +30,35 @@ class OneAdapter(
         val username: TextView
         val img: CircleImageView
         val delete: Button
+        val person: TextView
+
         init {
             title = itemView.findViewById(R.id.one_title)
             username = itemView.findViewById(R.id.one_username)
             img = itemView.findViewById(R.id.one_profile)
-            delete=itemView.findViewById(R.id.one_delete)
+            delete = itemView.findViewById(R.id.one_delete)
+            person = itemView.findViewById(R.id.one_person)
             itemView.setOnClickListener {
-                val builder = AlertDialog.Builder(itemView.context)
-                val ad = builder.create()
-                val log: LayoutInflater = LayoutInflater.from(itemView.context)
-                val dialogView = log.inflate(R.layout.chat_dialog, null)
-                var intent = Intent(itemView.context, Chat_Activity::class.java)
+                if (itemList[position].person < 2) {
+                    val builder = AlertDialog.Builder(itemView.context)
+                    val ad = builder.create()
+                    val log: LayoutInflater = LayoutInflater.from(itemView.context)
+                    val dialogView = log.inflate(R.layout.chat_dialog, null)
+                    var intent = Intent(itemView.context, Chat_Activity::class.java)
 
-                var no = dialogView.findViewById<Button>(R.id.dialog_no)
-                var yes = dialogView.findViewById<Button>(R.id.dialog_yes)
-                no.setOnClickListener { ad.dismiss() }
-                yes.setOnClickListener {
-                    intent.putExtra("board_uid", itemList[position].boardid)
-                    itemView.context.startActivity(intent)
-                    list_create("oneBoard",itemList[position].boardid)
-                    ad.dismiss()
+                    var no = dialogView.findViewById<Button>(R.id.dialog_no)
+                    var yes = dialogView.findViewById<Button>(R.id.dialog_yes)
+                    no.setOnClickListener { ad.dismiss() }
+                    yes.setOnClickListener {
+                        intent.putExtra("board_uid", itemList[position].boardid)
+                        itemView.context.startActivity(intent)
+                        personup(itemList[position].boardid)
+                        list_create("oneBoard", itemList[position].boardid)
+                        ad.dismiss()
+                    }
+                    ad.setView(dialogView)
+                    ad.show()
                 }
-                ad.setView(dialogView)
-                ad.show()
-
             }
         }
     }
@@ -70,6 +75,7 @@ class OneAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.setText(itemList.get(position).message)
         holder.username.setText(itemList.get(position).username)
+        holder.person.setText((itemList.get(position).person).toString() + "/2")
         if (itemList.get(position).profile) {
             var img = itemList.get(position).uid
             var imgload =
@@ -78,10 +84,10 @@ class OneAdapter(
                 .load(imgload)
                 .into(holder.img)
         }
-        if(itemList.get(position).uid == uid){
-            holder.delete.visibility=(View.VISIBLE)
+        if (itemList.get(position).uid == uid) {
+            holder.delete.visibility = (View.VISIBLE)
             holder.delete.setOnClickListener {
-                list_delete("oneBoard",itemList.get(position).boardid)
+                list_delete("oneBoard", itemList.get(position).boardid)
             }
 
         }

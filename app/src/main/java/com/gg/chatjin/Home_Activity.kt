@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_home_activity.*
@@ -81,4 +82,8 @@ fun list_delete(name:String,boardid:String){
 fun userlist_delete(uid:String,boardid:String){
     val db = Firebase.firestore
     db.collection("users").document(uid).collection("userlist").document(boardid).delete()
+}
+fun personup(boardid:String){
+    val db = Firebase.firestore
+    db.collection("oneBoard").document(boardid).update("person", FieldValue.increment(+1))
 }
