@@ -9,12 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.gg.chatjin.Chat_Activity
-import com.gg.chatjin.Home_Activity
-import com.gg.chatjin.R
-import com.gg.chatjin.list_create
+import com.gg.chatjin.*
 import com.google.firebase.firestore.ktx.getField
 import de.hdodenhof.circleimageview.CircleImageView
 import dtos.OneBoardDto
@@ -22,18 +21,20 @@ import kotlinx.android.synthetic.main.oneonone_item.view.*
 
 class OneAdapter(
     private val itemList: ArrayList<OneBoardDto>,
-    private val inflater: LayoutInflater
+    private val inflater: LayoutInflater,
+    val uid:String
 ) : RecyclerView.Adapter<OneAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView
         val username: TextView
         val img: CircleImageView
-
+        val delete: Button
         init {
             title = itemView.findViewById(R.id.one_title)
             username = itemView.findViewById(R.id.one_username)
             img = itemView.findViewById(R.id.one_profile)
+            delete=itemView.findViewById(R.id.one_delete)
             itemView.setOnClickListener {
                 val builder = AlertDialog.Builder(itemView.context)
                 val ad = builder.create()
@@ -76,6 +77,13 @@ class OneAdapter(
             Glide.with(holder.itemView.context)
                 .load(imgload)
                 .into(holder.img)
+        }
+        if(itemList.get(position).uid == uid){
+            holder.delete.visibility=(View.VISIBLE)
+            holder.delete.setOnClickListener {
+                list_delete("oneBoard",itemList.get(position).boardid)
+            }
+
         }
 
     }

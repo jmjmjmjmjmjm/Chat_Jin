@@ -23,7 +23,6 @@ class roomList : Fragment() {
     val user = Firebase.auth.currentUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
@@ -36,24 +35,27 @@ class roomList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        create()
+        room_refresh.setOnRefreshListener {
+            create()
+            room_refresh.isRefreshing=false
+        }
+    }
+    fun create(){
+        val db = Firebase.firestore
+        val user = Firebase.auth.currentUser
         val uid = user?.uid.toString()
-
         val userRef = db.collection("users").document(uid).collection("userlist")
         var userlist: ArrayList<OneBoardDto> =ArrayList()
         userRef.get().addOnSuccessListener {
-            Log.d("게시글답장확인",""+it)
             val list = it.toObjects<OneBoardDto>()
             for (i in 0 until list.size){
+                list[i].boardid
                 userlist.add(list[i])
             }
-            val adapter = List_Adapter(userlist, LayoutInflater.from(this.context))
+            val adapter = List_Adapter(userlist, LayoutInflater.from(context),user!!.uid)
             rommlist_re.adapter=adapter
-            rommlist_re.layoutManager= LinearLayoutManager(this.context)
-
-
+            rommlist_re.layoutManager= LinearLayoutManager(context)
         }
-
-
     }
-
 }

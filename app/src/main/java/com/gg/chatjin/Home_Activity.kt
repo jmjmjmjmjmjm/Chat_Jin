@@ -4,6 +4,7 @@ import adapters.PagerAdapter
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -57,7 +58,7 @@ fun list_create(board: String, boarduid:String) {
         groupstore.addOnSuccessListener {
             val data = it.data
             if (data != null) {
-                db.collection("users").document(user!!.uid).collection("userlist").add(data)
+                db.collection("users").document(user!!.uid).collection("userlist").document(boarduid).set(data)
             }  // 보드내용을 내 유저데이터에 저장
         }
     }
@@ -67,8 +68,17 @@ fun list_create(board: String, boarduid:String) {
         boardstore.addOnSuccessListener {
             val data = it.data
             if (data != null) {
-                db.collection("users").document(user!!.uid).collection("userlist").add(data)
+                db.collection("users").document(user!!.uid).collection("userlist").document(boarduid).set(data)
             }  // 보드내용을 내 유저데이터에 저장
         }
     }
+}
+fun list_delete(name:String,boardid:String){
+    val db = Firebase.firestore
+    db.collection(name).document(boardid).delete()
+
+}
+fun userlist_delete(uid:String,boardid:String){
+    val db = Firebase.firestore
+    db.collection("users").document(uid).collection("userlist").document(boardid).delete()
 }

@@ -12,27 +12,27 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.gg.chatjin.Chat_Activity
-import com.gg.chatjin.CreateRoom_Activity
-import com.gg.chatjin.R
-import com.gg.chatjin.list_create
+import com.gg.chatjin.*
 import de.hdodenhof.circleimageview.CircleImageView
 import dtos.GroupBoardDto
 import java.util.zip.Inflater
 
 class GroupAdapter(
     val itemList: ArrayList<GroupBoardDto>,
-    val inflater: LayoutInflater
+    val inflater: LayoutInflater,
+    val uid: String
 ) : RecyclerView.Adapter<GroupAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView
         val person: TextView
         val img: CircleImageView
+        val delete: Button
 
         init {
             title = itemView.findViewById(R.id.group_title)
             img = itemView.findViewById(R.id.group_img)
             person = itemView.findViewById(R.id.group_person)
+            delete = itemView.findViewById(R.id.group_delete)
             itemView.setOnClickListener {
                 val builder = AlertDialog.Builder(itemView.context)
                 val ad = builder.create()
@@ -45,7 +45,7 @@ class GroupAdapter(
                 yes.setOnClickListener {
                     intent.putExtra("board_uid", itemList[position].boardid)
                     itemView.context.startActivity(intent)
-                    list_create("groupBoard",itemList[position].boardid)
+                    list_create("groupBoard", itemList[position].boardid)
                     ad.dismiss()
                 }
                 ad.setView(dialogView)
@@ -74,6 +74,12 @@ class GroupAdapter(
             Glide.with(holder.itemView.context)
                 .load(imgload)
                 .into(holder.img)
+        }
+        if (itemList.get(position).uid == uid) {
+            holder.delete.visibility = (View.VISIBLE)
+            holder.delete.setOnClickListener {
+                list_delete("groupBoard", itemList.get(position).boardid)
+            }
         }
     }
 }

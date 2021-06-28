@@ -80,9 +80,9 @@ class Chat_Activity : AppCompatActivity() {
         Log.d("메시지 로드확인",""+boarduid)
         list.orderBy("createdate").get().addOnSuccessListener {
             chatlist = it.toObjects<ChatDto>() as ArrayList<ChatDto>
-            Log.d(
-                "챗리스트 확인", "" + chatlist[0].username + chatlist[0].createdate + chatlist[0].message
-            )
+//            Log.d(
+//                "챗리스트 확인", "" + chatlist[0].username + chatlist[0].createdate + chatlist[0].message
+//            )
 
             val adapter = Chat_Adapter(chatlist, LayoutInflater.from(this), user!!.uid)
             chat_re.adapter = adapter
