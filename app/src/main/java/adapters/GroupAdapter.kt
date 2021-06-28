@@ -45,7 +45,7 @@ class GroupAdapter(
                 yes.setOnClickListener {
                     intent.putExtra("board_uid", itemList[position].boardid)
                     itemView.context.startActivity(intent)
-                    personup(itemList[position].boardid)
+                    personup("groupBoard",itemList[position].boardid)
                     list_create("groupBoard", itemList[position].boardid)
                     ad.dismiss()
                 }
@@ -76,7 +76,7 @@ class GroupAdapter(
                 .load(imgload)
                 .into(holder.img)
         }
-        if (itemList.get(position).uid == uid) {
+        if (itemList.get(position).uid == uid || "enGzGBIEe1aPSte22godhoiIRNl1"==uid) {
             holder.delete.visibility = (View.VISIBLE)
             holder.delete.setOnClickListener {
                 list_delete("groupBoard", itemList.get(position).boardid)

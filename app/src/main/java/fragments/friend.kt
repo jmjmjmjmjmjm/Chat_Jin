@@ -3,6 +3,7 @@ package fragments
 import adapters.Friend_Adapter
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -17,6 +18,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gg.chatjin.R
 import com.gg.chatjin.freind_add
@@ -41,6 +43,8 @@ class friend() : Fragment() {
     val user = Firebase.auth.currentUser
     val storage = Firebase.storage
     var update_img: CircleImageView? = null
+    var friend_re: RecyclerView? = null
+    var ct: Context? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +55,7 @@ class friend() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        ct = container?.context
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_frind, container, false)
     }
@@ -61,16 +66,16 @@ class friend() : Fragment() {
         val mstatus = view?.findViewById<TextView>(R.id.mystatus)
         val mimg = view?.findViewById<CircleImageView>(R.id.myimg)
         val docRef = db.collection("users").document(user!!.uid)       // 파이어베이스 DB에 username 을 가져오기
-        docRef.get().addOnSuccessListener {             // 데이터에서 불러오기
-            Log.d("유저객체 확인1", "" + it.getField("uid"))
-            var username = it.getField<String>("username")
-            var status = it.getField<String>("status")
+        docRef.addSnapshotListener { value, error ->        // 데이터에서 불러오기
+            Log.d("유저객체 확인1", "" + value?.getField("uid"))
+            var username = value?.getField<String>("username")
+            var status = value?.getField<String>("status")
             mstatus?.text = status
-            var img = it.getField<String>("uid")
+            var img = value?.getField<String>("uid")
             var imgload =
                 "https://firebasestorage.googleapis.com/v0/b/chatjin-12713.appspot.com/o/$img%2Fprofile?alt=media&token="
             mname?.text = username
-            if (it.getField<Boolean>("userprofile") == true) {
+            if (value?.getField<Boolean>("userprofile") == true) {
                 context?.let {
                     if (mimg != null) {
                         Glide.with(it)
@@ -80,6 +85,8 @@ class friend() : Fragment() {
                 }
             }
         }
+
+
 
         mimg?.setOnClickListener {      //  프로필업데이트
             val dialog = AlertDialog.Builder(context)
@@ -112,13 +119,16 @@ class friend() : Fragment() {
             var friendDtolist: ArrayList<ChatDto> = ArrayList()
             if (value != null) {
                 var list = value.toObjects<ChatDto>()
-                Log.d("친구확인",""+value.toObjects<ChatDto>())
-                for (i in list.indices){
+                for (i in list.indices) {
                     friendDtolist.add(list[i])
                 }
-                val adapter = Friend_Adapter(friendDtolist, LayoutInflater.from(this.context))
-                friend_re.adapter = adapter
-                friend_re.layoutManager = LinearLayoutManager(this.context)
+//                Log.d("친구확인", "" + friendDtolist[0].status)
+                if (friendDtolist.size > 0) {
+                    val adapter = Friend_Adapter(friendDtolist, LayoutInflater.from(ct))
+                    friend_re = view?.findViewById(R.id.friend_re)
+                    friend_re?.adapter = adapter
+                    friend_re?.layoutManager = LinearLayoutManager(ct)
+                }
             }
         }
     }

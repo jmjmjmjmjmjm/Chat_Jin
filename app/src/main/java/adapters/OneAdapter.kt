@@ -54,7 +54,7 @@ class OneAdapter(
                     yes.setOnClickListener {
                         intent.putExtra("board_uid", itemList[position].boardid)
                         itemView.context.startActivity(intent)
-                        personup(itemList[position].boardid)
+                        personup("oneBoard", itemList[position].boardid)
                         list_create("oneBoard", itemList[position].boardid)
                         ad.dismiss()
                     }
@@ -80,7 +80,7 @@ class OneAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.title.setText(itemList.get(position).message)
         holder.username.setText(itemList.get(position).username)
-        holder.person.setText((itemList.get(position).person).toString()+ "/2")
+        holder.person.setText((itemList.get(position).person).toString() + "/2")
         if (itemList.get(position).profile) {
             var img = itemList.get(position).uid
             var imgload =
@@ -89,7 +89,7 @@ class OneAdapter(
                 .load(imgload)
                 .into(holder.img)
         }
-        if (itemList.get(position).uid == uid) {
+        if (itemList.get(position).uid == uid || "enGzGBIEe1aPSte22godhoiIRNl1" == uid) {
             holder.delete.visibility = (View.VISIBLE)
             holder.delete.setOnClickListener {
                 list_delete("oneBoard", itemList.get(position).boardid)

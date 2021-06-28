@@ -84,9 +84,9 @@ fun userlist_delete(uid:String,boardid:String){
     val db = Firebase.firestore
     db.collection("users").document(uid).collection("userlist").document(boardid).delete()
 }
-fun personup(boardid:String){
+fun personup(board:String,boardid:String){
     val db = Firebase.firestore
-    db.collection("oneBoard").document(boardid).update("person", FieldValue.increment(+1))
+    db.collection(board).document(boardid).update("person", FieldValue.increment(+1))
 }
 fun freind_add(myuid:String,youuid:String,data:ChatDto){
     val db = Firebase.firestore
